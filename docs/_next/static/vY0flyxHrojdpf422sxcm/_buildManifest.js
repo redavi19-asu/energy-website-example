@@ -3,8 +3,8 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [],
     "beforeFiles": [
       {
-        "source": "/new-ccc//_next/:path+",
-        "destination": "/new-ccc/_next/:path+"
+        "source": "/energy-website-example//_next/:path+",
+        "destination": "/energy-website-example/_next/:path+"
       }
     ],
     "fallback": []
