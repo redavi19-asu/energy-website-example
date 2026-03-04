@@ -126,7 +126,7 @@ function useStickyProgress(ref: React.RefObject<HTMLElement | null>) {
   });
 
   const eased = useSpring(scrollYProgress, { stiffness: 120, damping: 20, mass: 0.4 });
-  const translate = useTransform(eased, [0, 1], ["0%", "-18%"]);
+  const translate = useTransform(eased, [0, 1], ["10%", "-8%"]);
   const glow = useTransform(eased, [0, 0.5, 1], [0.35, 0.9, 0.55]);
 
   return { translate, glow };
