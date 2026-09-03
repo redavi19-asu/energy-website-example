@@ -16,6 +16,17 @@ const buildSteps = [
   ["C", "LET IT LEARN", "Live telemetry keeps refining how the site buys, stores, moves, and protects power."],
 ];
 
+function PowerGauge() {
+  return (
+    <div className="power-gauge" aria-label="Live site load 74 percent">
+      <div className="power-gauge__ticks" />
+      <div className="power-gauge__needle" />
+      <div className="power-gauge__hub" />
+      <div className="power-gauge__readout"><strong>74%</strong><span>SITE LOAD</span></div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="energy-poster min-h-screen overflow-hidden">
@@ -28,7 +39,11 @@ export default function Home() {
       <main>
         <section className="energy-hero">
           <div className="energy-index">001 — POWER SHOULD MOVE.</div>
+          <div className="energy-current energy-current--one"><i/><i/><i/><i/></div>
+          <div className="energy-current energy-current--two"><i/><i/><i/></div>
           <motion.div className="energy-sun" initial={{ scale: .82, rotate: -8 }} animate={{ scale: 1, rotate: 0 }} transition={{ duration: 1.1, ease: [0.22,1,0.36,1] }}>
+            <div className="energy-orbit energy-orbit--a"><b/><b/><b/></div>
+            <div className="energy-orbit energy-orbit--b"><b/><b/></div>
             <div className="energy-sun-core"><Sun size={56} strokeWidth={1.4} /></div>
           </motion.div>
           <div className="energy-hero-copy">
@@ -37,11 +52,12 @@ export default function Home() {
             </motion.h1>
             <div className="energy-hero-side">
               <p>We design charging hubs as active pieces of the grid — part power plant, part battery, part mobility system.</p>
+              <PowerGauge />
               <div className="energy-hero-rule" />
               <div className="energy-hero-metrics"><strong>184+</strong><span>HUBS ENGINEERED</span><strong>1.8M</strong><span>SESSIONS / YEAR</span></div>
             </div>
           </div>
-          <div className="energy-crawl"><span>GENERATE</span><Zap size={22}/><span>STORE</span><BatteryCharging size={22}/><span>MOVE</span><ArrowDownRight size={22}/><span>REPEAT</span></div>
+          <div className="energy-crawl"><div className="energy-crawl__track"><span>GENERATE</span><Zap size={22}/><span>STORE</span><BatteryCharging size={22}/><span>MOVE</span><ArrowDownRight size={22}/><span>REPEAT</span><span>GENERATE</span><Zap size={22}/><span>STORE</span><BatteryCharging size={22}/><span>MOVE</span><ArrowDownRight size={22}/><span>REPEAT</span></div></div>
         </section>
 
         <section className="energy-manifesto">
@@ -51,8 +67,8 @@ export default function Home() {
             <p className="energy-big-line energy-big-line--orange">It is a tiny power system with cars attached.</p>
           </div>
           <div className="energy-diagram" aria-hidden="true">
-            <div className="energy-wire energy-wire--one"/><div className="energy-wire energy-wire--two"/>
-            <div className="energy-node energy-node--sun">SUN</div><div className="energy-node energy-node--battery">BATTERY</div><div className="energy-node energy-node--car">EV</div><div className="energy-node energy-node--grid">GRID</div>
+            <div className="energy-wire energy-wire--one"><i/></div><div className="energy-wire energy-wire--two"><i/></div>
+            <div className="energy-node energy-node--sun">SUN<span className="node-pulse"/></div><div className="energy-node energy-node--battery">BATTERY<span className="node-pulse"/></div><div className="energy-node energy-node--car">EV<span className="node-pulse"/></div><div className="energy-node energy-node--grid">GRID<span className="node-pulse"/></div>
           </div>
         </section>
 
@@ -60,6 +76,7 @@ export default function Home() {
           {systems.map((item, i) => (
             <motion.article key={item.n} className="energy-system" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .25 }} transition={{ delay: i * .08 }}>
               <div className="energy-system-number">{item.n}</div>
+              <div className="energy-system-spinner" aria-hidden="true"><i/><i/><i/></div>
               <h2>{item.title}</h2>
               <strong>{item.stat}</strong>
               <p>{item.copy}</p>
@@ -69,6 +86,7 @@ export default function Home() {
         </section>
 
         <section className="energy-blackout">
+          <div className="energy-power-tape"><div>LIVE POWER FLOW · SOLAR → STORAGE → VEHICLES → GRID · LIVE POWER FLOW · SOLAR → STORAGE → VEHICLES → GRID ·</div></div>
           <div className="energy-blackout-kicker"><Factory size={18}/> HOW A SITE BECOMES A SYSTEM</div>
           <h2>THREE MOVES.<br/>ONE ENERGY MACHINE.</h2>
           <div className="energy-build-grid">
@@ -81,7 +99,7 @@ export default function Home() {
         </section>
 
         <section className="energy-closing">
-          <div className="energy-closing-sun"><div/></div>
+          <div className="energy-closing-sun"><div/><i/><i/><i/></div>
           <p className="energy-closing-eyebrow">THE GRID IS CHANGING.</p>
           <h2>BUILD SOMETHING<br/>THAT CHANGES<br/><span>WITH IT.</span></h2>
           <button className="energy-closing-button">ENTER THE PROJECT <ArrowUpRight size={20}/></button>
