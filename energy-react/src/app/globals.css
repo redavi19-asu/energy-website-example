@@ -17,16 +17,26 @@
   }
 }
 
+html {
+  background: #02050b;
+  color-scheme: dark;
+}
+
 body {
-  background: radial-gradient(circle at top, rgba(36, 120, 255, 0.22), transparent 55%),
+  margin: 0;
+  background-color: #02050b;
+  background-image: radial-gradient(circle at top, rgba(36, 120, 255, 0.22), transparent 55%),
     linear-gradient(180deg, rgba(2, 0, 36, 0.9) 0%, rgba(4, 8, 18, 1) 32%, rgba(6, 12, 24, 1) 100%);
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 * {
+  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
 }
@@ -42,4 +52,71 @@ body {
 *::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12));
   border-radius: 9999px;
+}
+
+/*
+  iPhone/iPad Safari can drop composited layers to white when a long sticky
+  section, huge blurred fixed gradients, backdrop filters and animated SVG
+  filters are all repainting during the same scroll. Keep the cinematic look,
+  but use cheaper layers on touch-sized screens.
+*/
+@media (max-width: 1100px) {
+  .sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  [class*="blur-"] {
+    filter: none !important;
+  }
+
+  svg [filter] {
+    filter: none !important;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  html,
+  body {
+    background-color: #02050b !important;
+    background-attachment: scroll !important;
+  }
+
+  .fixed {
+    position: absolute !important;
+  }
+
+  .sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  [class*="blur-"] {
+    filter: none !important;
+  }
+
+  svg [filter] {
+    filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
